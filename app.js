@@ -5,7 +5,7 @@ const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const express = require("express");
 const { loginAction } = require("./node/actions/loginAction");
-const { addProduct } = require("./node/actions/addProduct"); 
+const { addProduct } = require("./node/actions/addProduct.js"); 
 const { getProducts } = require("./node/actions/getProducts");
 const { markSoldProduct } = require("./node/actions/markSoldProduct");
 const { updateProduct } = require("./node/actions/updateProduct");
@@ -25,3 +25,10 @@ app.use(
     credentials: true,
   })
 );
+
+
+app.post("/product", addProduct);
+
+app.listen(4000, () => {
+    console.log("Server has started");
+  });
