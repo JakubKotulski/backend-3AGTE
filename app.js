@@ -29,6 +29,7 @@ app.use(
 
 app.post("/product", addProduct);
 app.get("/product", getProducts);
+app.patch("/product/:id/sold", markSoldProduct);
 
 app.listen(4000, () => {
     console.log("Server has started");
