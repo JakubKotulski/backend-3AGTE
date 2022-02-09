@@ -28,6 +28,7 @@ app.use(
 
 
 app.post("/product", addProduct);
+app.get("/product", getProducts);
 
 app.listen(4000, () => {
     console.log("Server has started");
