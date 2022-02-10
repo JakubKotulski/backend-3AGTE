@@ -9,7 +9,7 @@ const { addProduct } = require("./node/actions/addProduct.js");
 const { getProducts } = require("./node/actions/getProducts");
 const { markSoldProduct } = require("./node/actions/markSoldProduct");
 const { updateProduct } = require("./node/actions/updateProduct");
-const {productDeletion} = require('./node/actions/deleteProducts')
+const {deleteProduct} = require('./node/actions/deleteProducts')
 
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
@@ -32,6 +32,7 @@ app.post("/product", addProduct);
 app.get("/product", getProducts);
 app.patch("/product/:id/sold", markSoldProduct);
 app.put("/product/:id", updateProduct);
+app.delete("/product/:id/delete", deleteProduct);
 
 app.listen(4000, () => {
     console.log("Server has started");

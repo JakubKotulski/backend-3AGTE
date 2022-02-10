@@ -1,6 +1,6 @@
 const User = require('../models/product')
 
-const productDeletion = async (req, res) => {
+const deleteProduct = async (req, res) => {
     try{
         const producttodelete = await User.findByIdAndRemove(req.params.id);
         res.status(200);
@@ -12,4 +12,4 @@ const productDeletion = async (req, res) => {
 
 
 
-module.exports = {productDeletion}
+module.exports = {deleteProduct}
