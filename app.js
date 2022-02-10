@@ -9,6 +9,7 @@ const { addProduct } = require("./node/actions/addProduct.js");
 const { getProducts } = require("./node/actions/getProducts");
 const { markSoldProduct } = require("./node/actions/markSoldProduct");
 const { updateProduct } = require("./node/actions/updateProduct");
+const {productDeletion} = require('./node/actions/deleteProducts')
 
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
