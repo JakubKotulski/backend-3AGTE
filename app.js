@@ -34,6 +34,9 @@ app.get("/product", getProducts);
 app.patch("/product/:id/sold", markSoldProduct);
 app.put("/product/:id", updateProduct);
 
+app.post('/user', registerAction);
+app.delete('/user/:id/delete', userdelateAction)
+
 app.listen(4000, () => {
     console.log("Server has started");
   });
