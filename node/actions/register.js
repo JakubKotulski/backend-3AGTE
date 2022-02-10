@@ -16,6 +16,7 @@ const registerAction = async (req, res) => {
             password: hashedPassword,
         }); 
         await newUser.save();
+        res.status(201)
         return res.json(newUser); 
     } catch (err) {
         return res.json({ err });
