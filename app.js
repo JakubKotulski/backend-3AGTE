@@ -11,6 +11,9 @@ const { markSoldProduct } = require("./node/actions/markSoldProduct");
 const { updateProduct } = require("./node/actions/updateProduct");
 const {deleteProduct} = require('./node/actions/deleteProducts')
 
+const {registerAction} = require('./node/actions/register')
+const {userdelateAction} = require('./node/actions/userDelate')
+
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -33,6 +36,9 @@ app.get("/product", getProducts);
 app.patch("/product/:id/sold", markSoldProduct);
 app.put("/product/:id", updateProduct);
 app.delete("/product/:id/delete", deleteProduct);
+
+app.post('/user', registerAction);
+app.delete('/user/:id/delete', userdelateAction)
 
 app.listen(4000, () => {
     console.log("Server has started");
