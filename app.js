@@ -12,6 +12,7 @@ const { updateProduct } = require("./node/actions/updateProduct");
 
 const {registerAction} = require('./node/actions/register')
 const {userdelateAction} = require('./node/actions/userDelate')
+const {UpdateUser} = require('./node/actions/updateUser')
 
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
@@ -37,6 +38,7 @@ app.put("/product/:id", updateProduct);
 
 app.post('/user', registerAction);
 app.delete('/user/:id/delete', userdelateAction)
+app.put("/product/:id", UpdateUser);
 
 app.listen(4000, () => {
     console.log("Server has started");
