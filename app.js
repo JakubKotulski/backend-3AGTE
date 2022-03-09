@@ -9,6 +9,7 @@ const { addProduct } = require("./node/actions/addProduct.js");
 const { getProducts } = require("./node/actions/getProducts");
 const { markSoldProduct } = require("./node/actions/markSoldProduct");
 const { updateProduct } = require("./node/actions/updateProduct");
+const { productDelate} = require("./node/actions/productDelate")
 
 const {registerAction} = require('./node/actions/register')
 const {userdelateAction} = require('./node/actions/userDelate')
@@ -35,6 +36,7 @@ app.post("/product", addProduct);
 app.get("/product", getProducts);
 app.patch("/product/:id/sold", markSoldProduct);
 app.put("/product/:id", updateProduct);
+app.delete("/product/:id/delete", productDelate);
 
 app.post('/user', registerAction);
 app.delete('/user/:id/delete', userdelateAction)
