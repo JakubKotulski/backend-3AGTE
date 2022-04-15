@@ -4,10 +4,10 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
-// -->
 
-// const { loginAction } = require("./node/actions/loginAction");
+const { loginAction } = require("./node/actions/loginAction");
 const { addProduct } = require("./node/actions/addProduct.js"); 
 const { getProducts } = require("./node/actions/getProducts");
 const { markSoldProduct } = require("./node/actions/markSoldProduct");
@@ -34,6 +34,24 @@ app.use(
   })
 );
 
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+    // store: MongoStore.create({
+    //   mongoUrl: "mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/mtg-binder",
+    // }),
+    // ...(process.env.COOKIE_DOMAIN
+    //   ? { cookie: { domain: process.env.COOKIE_DOMAIN, httpOnly: false, sameSite: "None", secure: true } }
+    //   : {}),
+  })
+);
+
+app.use(cookieParser("secretcode"));
+app.use(passport.initialize());
+app.use(passport.session());
+require("./node/passport-config")(passport);
 
 app.post("/product", addProduct);
 app.get("/product", getProducts);
@@ -42,6 +60,7 @@ app.put("/product/:id", updateProduct);
 app.delete("/product/:id/delete", deleteProduct);
 
 app.post('/user', registerAction);
+app.post("/users/login", loginAction);
 app.delete('/user/:id/delete', userdelateAction)
 app.put("/user/:id", UpdateUser);
 
