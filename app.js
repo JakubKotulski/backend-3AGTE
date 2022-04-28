@@ -5,6 +5,7 @@ const passport = require("passport");
 const passportLocal = require("passport-local").Strategy;
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const MongoStore = require("connect-mongo");
 
 
 const { loginAction } = require("./node/actions/loginAction");
@@ -17,6 +18,9 @@ const {deleteProduct} = require('./node/actions/deleteProducts');
 const {registerAction} = require('./node/actions/register');
 const {userdelateAction} = require('./node/actions/userDelate');
 const {UpdateUser} = require('./node/actions/updateUser');
+const {getLoggedUserAction} = require("./node/actions/getLoggedUserAction");
+
+const {logoutAction} = require("./node/actions/logout")
 
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
@@ -39,12 +43,12 @@ app.use(
     secret: "secretcode",
     resave: true,
     saveUninitialized: true,
-    // store: MongoStore.create({
-    //   mongoUrl: "mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/mtg-binder",
-    // }),
-    // ...(process.env.COOKIE_DOMAIN
-    //   ? { cookie: { domain: process.env.COOKIE_DOMAIN, httpOnly: false, sameSite: "None", secure: true } }
-    //   : {}),
+    store: MongoStore.create({
+      mongoUrl: "mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend",
+    }),
+    ...(process.env.COOKIE_DOMAIN
+      ? { cookie: { domain: process.env.COOKIE_DOMAIN, httpOnly: false, sameSite: "None", secure: true } }
+      : {}),
   })
 );
 
@@ -61,8 +65,11 @@ app.delete("/product/:id/delete", deleteProduct);
 
 app.post('/user', registerAction);
 app.post("/users/login", loginAction);
-app.delete('/user/:id/delete', userdelateAction)
+app.delete('/user/:id/delete', userdelateAction);
 app.put("/user/:id", UpdateUser);
+app.get("/user/me", getLoggedUserAction);
+
+app.post("/logout", logoutAction);
 
 app.listen(4000, () => {
     console.log("Server has started");
