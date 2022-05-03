@@ -20,7 +20,9 @@ const {userdelateAction} = require('./node/actions/userDelate');
 const {UpdateUser} = require('./node/actions/updateUser');
 const {getLoggedUserAction} = require("./node/actions/getLoggedUserAction");
 
-const {logoutAction} = require("./node/actions/logout")
+const {logoutAction} = require("./node/actions/logout");
+const {addHistory} = require("./node/actions/addHistory");
+const {getHistory} = require("./node/actions/getHistoryAction");
 
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
@@ -70,6 +72,9 @@ app.put("/user/:id", UpdateUser);
 app.get("/user/me", getLoggedUserAction);
 
 app.post("/logout", logoutAction);
+
+app.post("/history", addHistory);
+app.get("/history/my", getHistory);
 
 app.listen(4000, () => {
     console.log("Server has started");
