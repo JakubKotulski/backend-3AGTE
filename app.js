@@ -24,6 +24,10 @@ const {logoutAction} = require("./node/actions/logout");
 const {addHistory} = require("./node/actions/addHistory");
 const {getHistory} = require("./node/actions/getHistoryAction");
 
+const {updateBalance} = require("./node/actions/updateBalanceAction");
+const {setBalance} = require("./node/actions/setStartBalanceAction");
+const {getBalance} = require("./node/actions/getBalanceAction");
+
 mongoose.connect("mongodb+srv://praktyki:praktyki2021@development.wtktz.mongodb.net/school-project-backend", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -75,6 +79,10 @@ app.post("/logout", logoutAction);
 
 app.post("/history", addHistory);
 app.get("/history/my", getHistory);
+
+app.put("/balance-update", updateBalance);
+app.post("/balance", setBalance);
+app.get("/get-balance", getBalance)
 
 app.listen(4000, () => {
     console.log("Server has started");
