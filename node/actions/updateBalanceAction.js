@@ -2,7 +2,8 @@ const Balance = require("../models/balance");
 
 const updateBalance = async (req, res) => {
     try{
-        await Balance.updateOne({userID: req.body.userID}, { $set: {money: req.body.balance}});
+        const id = req.user._id;
+        await Balance.updateOne({userID: id}, { $set: {money: req.body.balance}});
     }catch(e){
         console.log("ERR", e);
     }
